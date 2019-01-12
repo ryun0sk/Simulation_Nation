@@ -1,0 +1,62 @@
+###########################
+# Money grows Nation　#
+###########################
+cd("/Users/kojima/Desktop") #適宜変更
+###########################
+
+エージェント数 = 10
+初期平均所持金 = 10
+
+所持金 = rand(エージェント数).*初期平均所持金
+渡す確率 = rand(エージェント数)
+許容最低所持金 = 0
+相手上限 = rand(エージェント数)
+相手下限 = rand(エージェント数)
+予測所持金 = rand(エージェント数)
+許容確率 = rand(エージェント数)
+
+条件=rand(エージェント数,エージェント数)
+
+function 初期化()
+
+end
+
+function 集金()
+    所持金 -= rand(エージェント数).+1
+end
+
+function 復活(人)
+    所持金[人] = ave(所持金)
+    親 = randbet()
+    所持金
+end
+
+function 生産()
+    所持金 += 2*rand(エージェント数)
+end
+
+function 譲渡()
+        
+end
+
+function データ出力()
+    open("Kdata.dat", "w") do io
+        println(io,"ond",",","var")
+        for i in 1:時間
+            println(io,所持金,",")
+        end
+    end
+end
+
+function メイン()
+    初期化()
+    ターン = 1
+    for ターン 100
+        集金()
+        復活(人)
+        生産()
+        譲渡()
+    endfor
+end
+
+@time メイン()
